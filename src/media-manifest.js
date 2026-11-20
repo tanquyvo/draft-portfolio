@@ -495,3 +495,19 @@ export const mediaManifest = {
     ]
   }
 };
+
+// Public assets need the configured Vite base path on GitHub Pages project sites.
+const withBasePath = (value) => {
+  if (typeof value === 'string' && value.startsWith('/assets/')) {
+    return `${import.meta.env.BASE_URL}${value.slice(1)}`;
+  }
+  if (Array.isArray(value)) return value.map(withBasePath);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, nestedValue]) => [key, withBasePath(nestedValue)])
+    );
+  }
+  return value;
+};
+
+export const mediaManifest = withBasePath(rawMediaManifest);
