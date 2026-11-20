@@ -1,5 +1,5 @@
 // Generated from the project images supplied by Tan Quy.
-export const mediaManifest = {
+const rawMediaManifest = {
   "projects": {
     "koko-krunch": [
       {
